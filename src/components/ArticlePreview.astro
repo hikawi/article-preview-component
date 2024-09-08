@@ -6,14 +6,13 @@ import drawers from "./assets/drawers.jpg";
 ---
 
 <div
-  class="shadow-gray-blue flex h-[32rem] w-full flex-col overflow-clip rounded-[0.625rem] bg-white shadow-lg md:h-[17.5rem] md:w-[45.625rem] md:flex-row"
+  class="shadow-gray-blue flex min-h-[32rem] w-full flex-col rounded-xl bg-white shadow-lg md:h-[17.5rem] md:min-h-0 md:w-[45.625rem] md:flex-row"
 >
   <Image
     src={drawers}
+    height={200}
     alt="Drawers"
-    height={288}
-    width={288}
-    class="h-full w-full object-cover"
+    class="h-full w-full rounded-none rounded-t-xl object-cover md:rounded-none md:rounded-l-xl"
   />
   <ArticleContent />
 </div>
