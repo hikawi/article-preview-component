@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import ArticleContent from "./ArticleContent.astro";
 
 import drawers from "./assets/drawers.jpg";
@@ -11,8 +11,9 @@ import drawers from "./assets/drawers.jpg";
   <Image
     src={drawers}
     height={200}
+    width={285}
     alt="Drawers"
-    class="h-full w-full rounded-none rounded-t-xl object-cover lg:rounded-none lg:rounded-l-xl"
+    class="h-full w-full rounded-none rounded-t-xl object-cover lg:w-[280px] lg:rounded-none lg:rounded-l-xl"
   />
   <ArticleContent />
 </div>

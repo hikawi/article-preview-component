@@ -28,7 +28,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="relative flex h-16 w-full flex-row items-center justify-between px-10 pb-6"
+    class="relative flex h-16 w-full flex-row items-center justify-between px-6 pb-6"
   >
     <div class="flex h-full flex-row items-center justify-center gap-4">
       <img
