@@ -4,7 +4,7 @@ What did I do in this file bruh
 I don't know how to deal with this kind of design.
 */
 
-import { onBeforeMount, onMounted, onUnmounted, ref, watchEffect } from "vue";
+import { onBeforeMount, onUnmounted, ref } from "vue";
 import michelle from "./assets/avatar-michelle.jpg";
 import IconShare from "./icons/IconShare.vue";
 import ShareView from "./ShareView.vue";
@@ -13,7 +13,7 @@ const active = ref(false);
 const isMobile = ref(false);
 
 function checkMobile() {
-  isMobile.value = window.innerWidth <= 768;
+  isMobile.value = window.innerWidth <= 1024;
 }
 
 onBeforeMount(() => {
@@ -39,15 +39,16 @@ onUnmounted(() => {
         class="rounded-full object-contain"
       />
       <div class="flex h-full flex-col items-start justify-center">
-        <p class="text-dark-gray-blue text-sm font-bold">Michelle Appleton</p>
-        <p class="text-desat-dark-blue text-sm font-medium">28 Jun 2020</p>
+        <p class="text-sm font-bold text-dark-gray-blue">Michelle Appleton</p>
+        <p class="text-sm font-medium text-desat-dark-blue">28 Jun 2020</p>
       </div>
     </div>
     <div
       class="absolute right-6 z-20 flex size-8 cursor-pointer items-center justify-center rounded-full"
       :class="{
-        'bg-desat-dark-blue top-4': active,
+        'bg-desat-dark-blue': active,
         'bg-light-gray-blue': !active,
+        'top-4': isMobile && active,
       }"
       @click="active = !active"
     >
@@ -55,11 +56,11 @@ onUnmounted(() => {
         :class="{ 'fill-white': active, 'fill-desat-dark-blue': !active }"
       />
 
-      <ShareView v-if="!isMobile" :mobile="false" v-show="active" />
       <!-- This is the desktop view, where the share tab is above the share button. -->
+      <ShareView v-if="!isMobile" v-show="active" />
     </div>
 
-    <ShareView v-if="isMobile" mobile v-show="active" />
     <!-- This is the mobile view, the share tab covers the author tab. -->
+    <ShareView v-if="isMobile" v-show="active" />
   </div>
 </template>
