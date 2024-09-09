@@ -1,9 +1,29 @@
 <script setup lang="ts">
-import { ref } from "vue";
+/*
+What did I do in this file bruh
+I don't know how to deal with this kind of design.
+*/
+
+import { onBeforeMount, onMounted, onUnmounted, ref, watchEffect } from "vue";
 import michelle from "./assets/avatar-michelle.jpg";
 import IconShare from "./icons/IconShare.vue";
+import ShareView from "./ShareView.vue";
 
 const active = ref(false);
+const isMobile = ref(false);
+
+function checkMobile() {
+  isMobile.value = window.innerWidth <= 768;
+}
+
+onBeforeMount(() => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkMobile);
+});
 </script>
 
 <template>
@@ -24,13 +44,22 @@ const active = ref(false);
       </div>
     </div>
     <div
-      class="flex size-8 cursor-pointer items-center justify-center rounded-full"
-      :class="{ 'bg-desat-dark-blue': active, 'bg-light-gray-blue': !active }"
+      class="absolute right-6 z-20 flex size-8 cursor-pointer items-center justify-center rounded-full"
+      :class="{
+        'bg-desat-dark-blue top-4': active,
+        'bg-light-gray-blue': !active,
+      }"
       @click="active = !active"
     >
       <IconShare
         :class="{ 'fill-white': active, 'fill-desat-dark-blue': !active }"
       />
+
+      <ShareView v-if="!isMobile" :mobile="false" v-show="active" />
+      <!-- This is the desktop view, where the share tab is above the share button. -->
     </div>
+
+    <ShareView v-if="isMobile" mobile v-show="active" />
+    <!-- This is the mobile view, the share tab covers the author tab. -->
   </div>
 </template>
